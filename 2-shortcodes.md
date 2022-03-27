@@ -28,10 +28,10 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 > Een _shortcode_ is een soort tag die je kunt plaatsen binnen een pagina op je website. Bij het renderen van de pagina wordt de shortcode dan gerenderd door jouw functie. Een voorbeeld van een shortcode is `[jio-birthdays]`.
 
 1. Maak een functie `jio_render_shortcode`. Laat deze functie een stuk tekst returnen, zodat je kunt testen dat je shortcode straks werkt.
-2. Maak een functie `jio_register_shortcode`, waarin je een shortcode `jio-birthdays` toevoegt aan Wordpress met `add_shortcode`. Deze moet de functie `jio_render_shortcode` aanroepen.
+2. Maak een functie `jio_register_shortcode`, waarin je een shortcode `jio-birthdays` toevoegt aan Wordpress met [`add_shortcode`](https://developer.wordpress.org/reference/functions/add_shortcode/). Deze moet de functie `jio_render_shortcode` aanroepen.
 3. Tot slot, zorg dat `jio_register_shortcode` wordt aangeroepen gedurende de `init` action.
 
-> Een _action_ is een gebeurtenis in Wordpress, waarop je kunt inhaken m.b.v. de functie `add_action`. Zo'n functie noem je een _action hook_.
+> Een _action_ is een gebeurtenis in Wordpress, waarop je kunt inhaken m.b.v. de functie [`add_action`](https://developer.wordpress.org/reference/functions/add_action/). Zo'n functie noem je een _action hook_.
 
 **Checkpoint**: Maak een pagina aan met de inhoud `[jio-birthdays]`. Als alles goed is gegaan, zie je jouw test-output als je deze pagina bezoekt.
 
@@ -61,6 +61,8 @@ add_action("init", "jio_register_shortcode");
 1. Maak een functie genaamd `jio_get_birthdays` die alvast wat dummy-data teruggeeft. Gebruik de class hieronder.
 
 ```php
+
+// Create with: new JioBirthday('name', 'date-of-birth');
 class JioBirthday {
     public $name;
     public $birthday;
@@ -69,11 +71,9 @@ class JioBirthday {
         $this->birthday = $birthday;
     }
 }
-
-// Create with: new JioBirthday('name', 'date-of-birth');
 ```
 
-2. Zorg dat `jio_render_shortcode` de verjaardagen rendert in een lijst.
+2. Zorg dat `jio_render_shortcode` de verjaardagen weergeeft in een lijst.
 
 **Checkpoint**: Controleer de output van de shortcode.
 
@@ -111,8 +111,6 @@ function jio_render_shortcode() {
     $html .= "</ul>";
     return $html;
 }
-
-</details>
-    
-...
 ```
+    
+</details>
