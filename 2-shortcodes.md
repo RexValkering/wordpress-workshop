@@ -17,7 +17,7 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 
 > Zie [Header Requirements](https://developer.wordpress.org/plugins/plugin-basics/header-requirements/) voor meer informatie over de plugin header.
 
-2. In de Wordpress Admin Panel, ga naar de pagina [http://localhost:8888/wp-admin/admin.php?page=plugins](Plugins). Activeer jouw plugin.
+2. In de Wordpress Admin Panel, ga naar de pagina [Plugins](http://localhost:8888/wp-admin/admin.php?page=plugins). Activeer jouw plugin.
 
 **Checkpoint**: Controleer dat de plugin is geactiveerd.
 
@@ -35,6 +35,9 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 
 **Checkpoint**: Maak een pagina aan met de inhoud `[jio-birthdays]`. Als alles goed is gegaan, zie je jouw test-output als je deze pagina bezoekt.
 
+<details>
+    <summary>Oplossing (klik om te openen)</summary>
+    
 ```php
 ...
 
@@ -48,6 +51,8 @@ function jio_register_shortcode() {
 
 add_action("init", "jio_register_shortcode");
 ```
+    
+</details>
 
 ## C. Enkele verjaardagen tonen.
 
@@ -71,6 +76,9 @@ class JioBirthday {
 2. Zorg dat `jio_render_shortcode` de verjaardagen rendert in een lijst.
 
 **Checkpoint**: Controleer de output van de shortcode.
+
+<details>
+    <summary>Oplossing (klik om te openen)</summary>
 
 ```php
 ...
@@ -104,5 +112,7 @@ function jio_render_shortcode() {
     return $html;
 }
 
+</details>
+    
 ...
 ```
