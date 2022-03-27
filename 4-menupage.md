@@ -13,6 +13,9 @@ Ga verder in het bestand `jio-birthdays.php`.
 
 **Checkpoint**: Controleer dat er een pagina is in het admin menu met als inhoud jouw test-tekst.
 
+<details>
+<summary>Oplossing (klik om te openen)</summary>
+
 ```php
 function jio_render_admin_page() {
     echo "Hello world!";
@@ -24,12 +27,17 @@ function jio_register_menu_page() {
 add_action('admin_menu', 'jio_register_menu_page');
 ```
 
+</details>
+    
 ## B. Maak een formulier aan.
 
 1. In de functie `jio_render_admin_page`, voeg een simpel formulier toe met twee velden: `name` en `birthday`. Voeg ook een submit-knop toe.
 2. Wanneer het formulier gesubmit wordt, zorg dat er een POST wordt gedaan naar de huidige pagina.
 
 **Checkpoint**: Controleer dat je het formulier kunt submitten, en dat je dan terecht komt op de huidige pagina.
+
+<details>
+<summary>Oplossing (klik om te openen)</summary>
 
 ```php
 function jio_render_admin_page() {
@@ -47,6 +55,8 @@ function jio_render_admin_page() {
 }
 ```
 
+</details>
+
 ## C. Het formulier verwerken.
 
 1. Voeg bovenaan de functie `jio_render_admin_page` een stuk logica toe dat controleert of er een POST-actie is uitgevoerd.
@@ -56,6 +66,9 @@ function jio_render_admin_page() {
 > Een gebruiker redirecten nadat een wijziging is doorgevoerd staat bekent als [Post/Redirect/Get](https://en.wikipedia.org/wiki/Post/Redirect/Get). Deze best-practice voorkomt dat een actie nogmaals wordt uitgevoerd als de gebruiker de pagina herlaadt.
 
 **Checkpoint**: Controleer dat je een verjaardag kunt toevoegen via deze admin-pagina.
+
+<details>
+<summary>Oplossing (klik om te openen)</summary>
 
 ```php
 function jio_render_admin_page() {
@@ -87,3 +100,5 @@ function jio_render_admin_page() {
     <?php
 }
 ```
+
+</details>
