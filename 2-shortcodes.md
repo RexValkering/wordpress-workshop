@@ -117,3 +117,5 @@ function jio_render_shortcode() {
 ```
     
 </details>
+
+Volgende sectie: [Een database-tabel maken](3-datamodel.md)
