@@ -74,6 +74,9 @@ class JioBirthday {
 ```
 
 2. Zorg dat `jio_render_shortcode` de verjaardagen weergeeft in een lijst.
+3. Zorg dat je de naam en verjaardag "sanitized" door middel van de `esc_html` functie. 
+
+> **Let op**: Wanneer je in PHP data van gebruikers op het scherm toont, moet je deze *altijd* sanitizen met bijpassende functies! Doe je dat niet, dan open je de deur voor cross-site scripting (XSS) aanvallen. In de meeste gevallen gebruik je `esc_html`, maar er bestaan ook `esc_attr` (voor html attributes), `esc_url` en `esc_textarea`.
 
 **Checkpoint**: Controleer de output van de shortcode.
 
