@@ -35,7 +35,7 @@ class JioDatamodel {
         }
 
         // TODO: Define new SQL table
-        $table_name = $wpdb->prefix() . "jio_birthdays";
+        $table_name = $wpdb->prefix . "jio_birthdays";
         $sql = "";
 
         // Let dbDelta update our database definitions
@@ -49,6 +49,8 @@ class JioDatamodel {
 
 add_action('plugins_loaded', 'JioDatamodel::check_database');
 ```
+
+> Je ziet dat de `table_name` begint met `$wpdb->prefix`. Dit is een best-practice. Het kan namelijk zijn dat dezelfde database meerdere websites bevat met verschillende prefixes. Door gebruik te maken van deze prefix, is je plugin altijd geschikt voor meerdere sites.
 
 3. Roep het bestand aan bovenaan je hoofd-pluginfile (`jio-birthdays.php`).
 
