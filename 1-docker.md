@@ -11,18 +11,31 @@ In deze sectie ga je lokaal met Docker een Wordpress-container opstarten.
 
 1. Maak een folder aan waarin je aan de slag gaat met Wordpress. Bijvoorbeeld: wordpress-workshop. Voer de volgende stappen uit vanuit deze folder.
 
+<details>
+<summary>Oplossing</summary>
+
 ```bash
 mkdir wordpress-workshop
 cd wordpress-workshop
 ```
 
+</details>
+
 2. Maak een folder aan genaamd jio-birthdays. Dit zal onze plugin-folder zijn.
+
+<details>
+<summary>Oplossing</summary>
 
 ```bash
 mkdir our-birthdays
 ```
 
+</details>
+
 3. Maak een docker-compose.yml bestand met drie containers: wordpress:latest, MySQL (database), en PHPmyadmin. Zorg dat de volume persistent is.
+
+<details>
+<summary>docker-compose.yml</summary>
 
 ```yml
 version: "3.7"
@@ -68,11 +81,18 @@ volumes:
   db_data: {}
 ```
 
+</details>
+
 4. Start de docker-containers.
+
+<details>
+<summary>Oplossing</summary>
 
 ```bash
 docker-compose up
 ```
+
+</details>
 
 5. Ga naar `http://localhost:8888` en voer de 5-minute Wordpress install uit.
 
