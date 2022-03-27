@@ -89,7 +89,7 @@ $sql = "CREATE TABLE $table_name (
             name varchar(100),
             birthday date,
             PRIMARY KEY  (id)
-        ) $charset_collage;";
+        ) $charset_collate;";
         
         // Let dbDelta update our database definitions
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
