@@ -17,7 +17,7 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 
 > Zie [Header Requirements](https://developer.wordpress.org/plugins/plugin-basics/header-requirements/) voor meer informatie over de plugin header.
 
-2. In de Wordpress Admin Panel, ga naar de pagina plugins. Activeer jouw plugin.
+2. In de Wordpress Admin Panel, ga naar de pagina [http://localhost:8888/wp-admin/admin.php?page=plugins](Plugins). Activeer jouw plugin.
 
 **Checkpoint**: Controleer dat de plugin is geactiveerd.
 
