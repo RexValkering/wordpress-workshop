@@ -96,4 +96,4 @@ docker-compose up
 
 5. Ga naar `http://localhost:8888` en voer de 5-minute Wordpress install uit.
 
-Controleer dat je nu een werkende Wordpress-instantie hebt en kunt inloggen op `http://localhost:8888/wp-admin`.
+**Checkpoint**: Controleer dat je nu een werkende Wordpress-instantie hebt en kunt inloggen op `http://localhost:8888/wp-admin`.
