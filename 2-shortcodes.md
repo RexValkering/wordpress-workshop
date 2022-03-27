@@ -28,7 +28,7 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 
 > Een _shortcode_ is een soort tag die je kunt plaatsen binnen een pagina op je website. Bij het renderen van de pagina wordt de shortcode dan gerenderd door jouw functie. Een voorbeeld van een shortcode is `[jio-birthdays]`.
 
-1. Maak een functie `jio_render_shortcode`. Laat deze functie een stuk tekst returnen, zodat je kunt testen dat je shortcode straks werkt.
+1. Maak een functie `jio_render_shortcode`. Laat deze functie een `p` element met een stuk tekst returnen, zodat je kunt testen dat je shortcode straks werkt.
 2. Maak een functie `jio_register_shortcode`, waarin je een shortcode `jio-birthdays` toevoegt aan Wordpress met [`add_shortcode`](https://developer.wordpress.org/reference/functions/add_shortcode/). Deze moet de functie `jio_render_shortcode` aanroepen.
 3. Tot slot, zorg dat `jio_register_shortcode` wordt aangeroepen gedurende de `init` action.
 
@@ -43,7 +43,7 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 ...
 
 function jio_render_shortcode() {
-    return "Hello world!";
+    return "<p>Hello world!</p>";
 }
 
 function jio_register_shortcode() {
@@ -107,7 +107,7 @@ function jio_render_shortcode() {
     $html = "<ul>";
     foreach (jio_get_birthdays() as $record) {
         $html .= sprintf(
-            "<li>%s: %s<li>",
+            "<li>%s: %s</li>",
             esc_html($record->name),
             esc_html($record->birthday)
         );
