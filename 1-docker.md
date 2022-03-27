@@ -9,7 +9,7 @@ In deze sectie ga je lokaal met Docker een Wordpress-container opstarten.
 
 ## Stappenplan
 
-1. Maak een folder aan waarin je aan de slag gaat met Wordpress. Bijvoorbeeld: wordpress-workshop. Voer de volgende stappen uit vanuit deze folder.
+1. Maak een folder aan waarin je aan de slag gaat met Wordpress. Bijvoorbeeld: wordpress-workshop.
 
 <details>
 <summary>Oplossing (klik om te openen)</summary>
@@ -21,7 +21,7 @@ cd wordpress-workshop
 
 </details>
 
-2. Maak een folder aan genaamd jio-birthdays. Dit zal onze plugin-folder zijn.
+2. Maak in deze folder een folder aan genaamd jio-birthdays. Dit zal onze plugin-folder zijn.
 
 <details>
 <summary>Oplossing (klik om te openen)</summary>
