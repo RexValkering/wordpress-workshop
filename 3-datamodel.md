@@ -47,7 +47,7 @@ class JioDatamodel {
     }
 }
 
-add_action('plugins_loaded', 'JioBirthdays::check_database');
+add_action('plugins_loaded', 'JioDatamodel::check_database');
 ```
 
 3. Roep het bestand aan bovenaan je hoofd-pluginfile (`jio-birthdays.php`).
