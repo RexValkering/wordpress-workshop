@@ -79,8 +79,7 @@ $sql = "CREATE TABLE $table_name (
 **Checkpoint**: Controleer in phpmyadmin (`http://localhost:8889`) dat de tabel `wp_jio_birthdays` is aangemaakt.
 
 <details>
-
-    <summary>Oplossing (klik om te openen)</summary>
+<summary>Oplossing (klik om te openen)</summary>
     
 ```php
         ...
@@ -111,8 +110,7 @@ $sql = "CREATE TABLE $table_name (
 **Checkpoint**: Controleer dat de verjaardagen op je pagina overeenkomen met wat je in de database hebt gezet.
 
 <details>
-
-    <summary>Oplossing (klik om te openen)</summary>
+<summary>Oplossing (klik om te openen)</summary>
 
 ```php
 function jio_get_birthdays() {
