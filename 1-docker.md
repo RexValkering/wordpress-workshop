@@ -27,7 +27,7 @@ cd wordpress-workshop
 <summary>Oplossing (klik om te openen)</summary>
 
 ```bash
-mkdir our-birthdays
+mkdir jio-birthdays
 ```
 
 </details>
