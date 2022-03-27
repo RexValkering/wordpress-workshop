@@ -57,6 +57,8 @@ add_action('plugins_loaded', 'JioDatamodel::check_database');
 require_once("./datamodel.php");
 ```
 
+**Checkpoint**: Controleer dat er geen errors zijn wanneer je een pagina binnen Wordpress ververst.
+
 ## B. Een databasetabel maken.
 
 1. Vul de parameter `$sql` met geldige SQL voor het definieren van een databasetabel voor verjaardagen. Zorg dat deze tabel drie kolommen heeft: `id` van type `integer(11)`, `name` van type `varchar(100)`, birthday van type `date`. Een voorbeeld van een geldige `$sql` is als volgt:
@@ -74,7 +76,13 @@ $sql = "CREATE TABLE $table_name (
 
 2. Hoog de versie op van `0.00` naar `0.01` en ververs een pagina binnen je Wordpress om de upgrade te doen.
 
-```sql
+**Checkpoint**: Controleer in phpmyadmin (`http://localhost:8889`) dat de tabel `wp_jio_birthdays` is aangemaakt.
+
+<details>
+
+    <summary>Oplossing (klik om te openen)</summary>
+    
+```php
         ...
         $table_name = $wpdb->prefix() . "jio_birthdays";
         $sql = "CREATE TABLE $table_name (
@@ -83,9 +91,16 @@ $sql = "CREATE TABLE $table_name (
             birthday date,
             PRIMARY KEY  id
         ) $charset_collage;";
+        
+        // Let dbDelta update our database definitions
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        dbDelta($sql);
+
+        // Update the stored plugin database version
+        update_option(static::$version_key, static::$version);
 ```
 
-**Checkpoint**: Controleer in phpmyadmin (`http://localhost:8889`) dat de tabel `wp_jio_birthdays` is aangemaakt.
+</details>
 
 ## C. De databasetabel vullen met data.
 
@@ -95,9 +110,17 @@ $sql = "CREATE TABLE $table_name (
 
 **Checkpoint**: Controleer dat de verjaardagen op je pagina overeenkomen met wat je in de database hebt gezet.
 
+<details>
+
+    <summary>Oplossing (klik om te openen)</summary>
+
 ```php
 function jio_get_birthdays() {
     global $wpdb;
     return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}jio_birthdays");
 }
 ```
+
+</details>
+
+Volgende sectie: [Een plugin-menupagina maken](4-menupage.md)
