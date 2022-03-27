@@ -54,7 +54,7 @@ add_action('plugins_loaded', 'JioDatamodel::check_database');
 
 ```php
 <?php
-require_once("./datamodel.php");
+require_once("datamodel.php");
 ```
 
 **Checkpoint**: Controleer dat er geen errors zijn wanneer je een pagina binnen Wordpress ververst.
@@ -68,11 +68,11 @@ $sql = "CREATE TABLE $table_name (
     id integer(11) NOT NULL AUTO_INCREMENT,
     <second column definition>,
     <third column definition>,
-    PRIMARY KEY  id
+    PRIMARY KEY  (id)
 ) $charset_collage;";
 ```
 
-> Let op: De 2 spaties tussen `KEY` en `id` zijn verplicht.
+> Let op: De 2 spaties tussen `KEY` en `(id)` zijn verplicht.
 
 2. Hoog de versie op van `0.00` naar `0.01` en ververs een pagina binnen je Wordpress om de upgrade te doen.
 
@@ -88,7 +88,7 @@ $sql = "CREATE TABLE $table_name (
             id integer(11) NOT NULL AUTO_INCREMENT,
             name varchar(100),
             birthday date,
-            PRIMARY KEY  id
+            PRIMARY KEY  (id)
         ) $charset_collage;";
         
         // Let dbDelta update our database definitions
