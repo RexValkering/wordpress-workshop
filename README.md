@@ -27,4 +27,9 @@ Onderaan elke opdracht staat een snippet met de juiste code, achter een spoiler 
 <details>
  <summary>Summary Goes Here</summary>
  ...this is hidden, collapsable content...
+ ```php
+ <?php
+   echo "test";
+ ?>
+ ```
 </details>
