@@ -34,6 +34,8 @@ mkdir jio-birthdays
 
 3. Maak een `docker-compose.yml` bestand met drie containers: wordpress:latest, MySQL (database), en PHPmyadmin. Zorg dat de volume persistent is. Zorg dat de jio-birthdays folder gemount wordt in de container op `/var/www/html/wp-content/plugins/jio-birthdays`. Gebruik hierbij gerust onderstaand voorbeeld.
 
+> De reden dat we de folder `docker-compose.yml` in de container mounten, is zodat we wijzigingen aan de plugin kunnen maken zonder steeds de container opnieuw te hoeven opstarten. Dit is een must voor elke Wordpress-developer!
+
 <details>
 <summary>docker-compose.yml (klik om te openen)</summary>
 
