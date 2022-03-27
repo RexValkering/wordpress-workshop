@@ -10,6 +10,7 @@ In deze pagina ga je een pagina maken waarop je later de verjaardagen zult tonen
 <?php
 /**
  * Plugin Name: JIO Birthdays
+ * Description: Een simpele plugin voor het weergeven van verjaardagen.
  * Author: <Jouw naam hier>
  * Version: 0.0.1
  */
