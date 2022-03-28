@@ -1,4 +1,4 @@
-e# 5. Vervolgvraagstukken
+# 5. Vervolgvraagstukken
 
 Tot zover het technische deel van de workshop. Ben je zo ver gekomen en zoek je naar vervolgopdrachten? De volgende dingen zou je kunnen oppakken, deze geven je meer kennis:
 
