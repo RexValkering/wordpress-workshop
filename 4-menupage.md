@@ -102,6 +102,7 @@ function jio_handle_add_birthday() {
 }
 
 add_action('admin_post_jio_add_birthday', 'jio_handle_add_birthday');
+```
 
 </details>
 
