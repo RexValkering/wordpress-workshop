@@ -35,7 +35,7 @@ class JioDatamodel {
         }
 
         // TODO: Define new SQL table
-        $table_name = $wpdb->prefix() . "jio_birthdays";
+        $table_name = $wpdb->prefix . "jio_birthdays";
         $sql = "";
 
         // Let dbDelta update our database definitions
@@ -47,15 +47,19 @@ class JioDatamodel {
     }
 }
 
-add_action('plugins_loaded', 'JioBirthdays::check_database');
+add_action('plugins_loaded', 'JioDatamodel::check_database');
 ```
+
+> Je ziet dat de `table_name` begint met `$wpdb->prefix`. Dit is een best-practice. Het kan namelijk zijn dat dezelfde database meerdere websites bevat met verschillende prefixes. Door gebruik te maken van deze prefix, is je plugin altijd geschikt voor meerdere sites.
 
 3. Roep het bestand aan bovenaan je hoofd-pluginfile (`jio-birthdays.php`).
 
 ```php
 <?php
-require_once("./datamodel.php");
+require_once("datamodel.php");
 ```
+
+**Checkpoint**: Controleer dat er geen errors zijn wanneer je een pagina binnen Wordpress ververst.
 
 ## B. Een databasetabel maken.
 
@@ -66,26 +70,38 @@ $sql = "CREATE TABLE $table_name (
     id integer(11) NOT NULL AUTO_INCREMENT,
     <second column definition>,
     <third column definition>,
-    PRIMARY KEY  id
+    PRIMARY KEY  (id)
 ) $charset_collage;";
 ```
 
-> Let op: De 2 spaties tussen `KEY` en `id` zijn verplicht.
+> Let op: De 2 spaties tussen `KEY` en `(id)` zijn verplicht.
 
 2. Hoog de versie op van `0.00` naar `0.01` en ververs een pagina binnen je Wordpress om de upgrade te doen.
 
-```sql
+**Checkpoint**: Controleer in phpmyadmin (`http://localhost:8889`) dat de tabel `wp_jio_birthdays` is aangemaakt.
+
+<details>
+<summary>Oplossing (klik om te openen)</summary>
+    
+```php
         ...
         $table_name = $wpdb->prefix() . "jio_birthdays";
         $sql = "CREATE TABLE $table_name (
             id integer(11) NOT NULL AUTO_INCREMENT,
             name varchar(100),
             birthday date,
-            PRIMARY KEY  id
-        ) $charset_collage;";
+            PRIMARY KEY  (id)
+        ) $charset_collate;";
+        
+        // Let dbDelta update our database definitions
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        dbDelta($sql);
+
+        // Update the stored plugin database version
+        update_option(static::$version_key, static::$version);
 ```
 
-**Checkpoint**: Controleer in phpmyadmin (`http://localhost:8889`) dat de tabel `wp_jio_birthdays` is aangemaakt.
+</details>
 
 ## C. De databasetabel vullen met data.
 
@@ -95,9 +111,16 @@ $sql = "CREATE TABLE $table_name (
 
 **Checkpoint**: Controleer dat de verjaardagen op je pagina overeenkomen met wat je in de database hebt gezet.
 
+<details>
+<summary>Oplossing (klik om te openen)</summary>
+
 ```php
 function jio_get_birthdays() {
     global $wpdb;
     return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}jio_birthdays");
 }
 ```
+
+</details>
+
+Volgende sectie: [Een plugin-menupagina maken](4-menupage.md)
