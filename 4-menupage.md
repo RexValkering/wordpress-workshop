@@ -7,7 +7,7 @@ Hoe zorg je ervoor dat een beheerder deze kan bijwerken?
 
 Ga verder in het bestand `jio-birthdays.php`.
 
-1. Maak een functie `jio_render_admin_page`. Dit is waar je straks je formulieren plaatst. Zorg voor nu dat je een simpele test-tekst print (`echo "hello world";`).
+1. Maak een functie `jio_render_admin_page`. Dit is waar je straks je formulieren plaatst. Zorg voor nu dat je een simpele test-tekst print (`echo '<div class="wrap">hello world</div>';`).
 2. Maak een functie `jio_register_menu_page` en zorg dat deze aangeroepen wordt gedurende de action `admin_menu`.
 3. Zorg dat `jio_register_menu_page` een pagina toevoegt aan het Wordpress admin menu met de functie [`add_menu_page`](https://developer.wordpress.org/reference/functions/add_menu_page/).
 
@@ -18,7 +18,7 @@ Ga verder in het bestand `jio-birthdays.php`.
 
 ```php
 function jio_render_admin_page() {
-    echo "Hello world!";
+    echo '<div class="wrap">Hello world!</div>';
 }
 
 function jio_register_menu_page() {
@@ -42,17 +42,24 @@ add_action('admin_menu', 'jio_register_menu_page');
 ```php
 function jio_render_admin_page() {
     ?>
+    <div class="wrap">
     <form action="?page=jio-birthdays" method="POST">
-        <label id="jio-name-label" for="jio-name">Name *</label>
-        <input id="jio-name" name="name" aria-labelledby="jio-name-label" />
+        <p>
+            <label id="jio-name-label" for="jio-name">Name *</label>
+            <input id="jio-name" name="name" aria-labelledby="jio-name-label" />
+        </p>
 
-        <label id="jio-birthday-label" for="jio-birthday">Birthday *</label>
-        <input id="jio-birthday" name="birthday" aria-labelledby="jio-birthday-label" />
+        <p>
+            <label id="jio-birthday-label" for="jio-birthday">Birthday *</label>
+            <input id="jio-birthday" name="birthday" aria-labelledby="jio-birthday-label" placeholder="yyyy-mm-dd" />
+        </p>
 
-        <input name="submit" type="submit" />
+        <input name="submit" type="submit" value="Opslaan" />
     </form>
+    </div>
     <?php
 }
+
 ```
 
 </details>
@@ -73,6 +80,8 @@ function jio_render_admin_page() {
 ```php
 function jio_render_admin_page() {
     if (isset($_POST["submit"])) {
+        global $wpdb;
+
         $name = $_POST["name"] ?? null;
         $birthday = $_POST["birthday"] ?? null;
         if (!$name || !$birthday) {
@@ -88,15 +97,7 @@ function jio_render_admin_page() {
     }
     ?>
 
-    <form action="?page=jio-birthdays" method="POST">
-        <label id="jio-name-label" for="jio-name">Name *</label>
-        <input id="jio-name" name="name" aria-labelledby="jio-name-label" />
-
-        <label id="jio-birthday-label" for="jio-birthday">Birthday *</label>
-        <input id="jio-birthday" name="birthday" aria-labelledby="jio-birthday-label" />
-
-        <input name="submit" type="submit" />
-    </form>
+    ...
     <?php
 }
 ```
