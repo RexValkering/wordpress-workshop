@@ -31,10 +31,16 @@ add_action('admin_menu', 'jio_register_menu_page');
     
 ## B. Maak een formulier aan.
 
-1. In de functie `jio_render_admin_page`, voeg een simpel formulier toe met twee velden: `name` en `birthday`. Voeg ook een submit-knop toe.
-2. Wanneer het formulier gesubmit wordt, zorg dat er een POST wordt gedaan naar de huidige pagina.
+Er zijn verschillende manieren om een formulier in het admin-panel door je plugin te laten verwerken. Zo kun je gebruik maken van de WP Options API, kun je API-endpoints registreren voor asynchrone verwerking, of kun je gebruikmaken van `admin-post.php`. Die laatste is het meest eenvoudig en gaan we hier toepassen.
 
-**Checkpoint**: Controleer dat je het formulier kunt submitten, en dat je dan terecht komt op de huidige pagina.
+> Binnen Wordpress admin-menupagina's is het ongebruikelijk om data te laten verwerken door dezelfde functie die het formulier toont. De reden hiervoor is dat je vaak een gebruiker wilt redirecten nadat deze een wijziging heeft uitgevoerd, om te voorkomen dat een wijziging bij een refresh wordt herhaald. Echter, ten tijde van het aanroepen van deze functie heeft Wordpress al een `200 OK` naar de gebruiker gestuurd; je kunt op dat punt niet meer redirecten.
+
+1. In de functie `jio_render_admin_page`, voeg een simpel formulier toe met twee tekstvelden: `name` en `birthday`. Voeg ten tweede een `hidden` input-veld toe, met als name `action` en waarde `jio_add_birthday`. Voeg tot slot een submit-knop toe.
+2. Wanneer het formulier gesubmit wordt, zorg dat er een POST wordt gedaan naar `admin-post.php`.
+
+Op dit punt zul je een witte pagina krijgen als je het formulier submit. Dit is okee.
+
+**Checkpoint**: Controleer dat je het formulier kunt submitten, en dat je dan terecht komt op een andere, lege pagina.
 
 <details>
 <summary>Oplossing (klik om te openen)</summary>
@@ -44,6 +50,7 @@ function jio_render_admin_page() {
     ?>
     <div class="wrap">
     <form action="?page=jio-birthdays" method="POST">
+        <input type="hidden" name="action" value="jio_add_birthday" />
         <p>
             <label id="jio-name-label" for="jio-name">Name *</label>
             <input id="jio-name" name="name" aria-labelledby="jio-name-label" />
@@ -66,11 +73,10 @@ function jio_render_admin_page() {
 
 ## C. Het formulier verwerken.
 
-1. Voeg bovenaan de functie `jio_render_admin_page` een stuk logica toe dat controleert of er een POST-actie is uitgevoerd.
-2. Gebruik [`$wpdb->insert`](https://developer.wordpress.org/reference/classes/wpdb/insert/) om een nieuwe entry toe te voegen aan de database tabel.
-3. Aan het eind van de functie, redirect de gebruiker naar de huidige pagina.
-
-> Een gebruiker redirecten nadat een wijziging is doorgevoerd staat bekent als [Post/Redirect/Get](https://en.wikipedia.org/wiki/Post/Redirect/Get). Deze best-practice voorkomt dat een actie nogmaals wordt uitgevoerd als de gebruiker de pagina herlaadt.
+1. Maak een nieuwe functie aan, genaamd `jio_handle_add_birthday`.
+2. In deze functie, verwerk de invoerdata. Gebruik [`$wpdb->insert`](https://developer.wordpress.org/reference/classes/wpdb/insert/) om een nieuwe entry toe te voegen aan de database tabel.
+3. Aan het eind van de functie, redirect de gebruiker naar `admin.php?page=jio-birthdays&status=success`.
+4. Hook de functie in de `admin_post_jio_add_birthday` action.
 
 **Checkpoint**: Controleer dat je een verjaardag kunt toevoegen via deze admin-pagina.
 
@@ -78,28 +84,23 @@ function jio_render_admin_page() {
 <summary>Oplossing (klik om te openen)</summary>
 
 ```php
-function jio_render_admin_page() {
-    if (isset($_POST["submit"])) {
-        global $wpdb;
+function jio_handle_add_birthday() {
+    global $wpdb;
 
-        $name = $_POST["name"] ?? null;
-        $birthday = $_POST["birthday"] ?? null;
-        if (!$name || !$birthday) {
-            wp_redirect("?page=jio-birthdays&status=error");
-            exit;
-        }
-
-        $result = $wpdb->insert("{$wpdb->prefix}jio_birthdays", ["name" => $name, "birthday" => $birthday], ["%s", "%s"]);
-
-        $redirect_page = "?page=jio-birthdays&status=" . ($result ? "success" : "error");
-        wp_redirect($redirect_page);
+    $name = $_POST["name"] ?? null;
+    $birthday = $_POST["birthday"] ?? null;
+    if (!$name || !$birthday) {
+        wp_redirect("admin.php?page=jio-birthdays&status=error");
         exit;
     }
-    ?>
 
-    ...
-    <?php
+    $result = $wpdb->insert("{$wpdb->prefix}jio_birthdays", ["name" => $name, "birthday" => $birthday], ["%s", "%s"]);
+
+    $redirect_page = "admin.php?page=jio-birthdays&status=" . ($result ? "success" : "error");
+    wp_redirect($redirect_page);
+    exit;
 }
-```
+
+add_action('admin_post_jio_add_birthday', 'jio_handle_add_birthday');
 
 </details>
