@@ -21,3 +21,4 @@ Onderaan elke opdracht staat een snippet met de juiste code, achter een spoiler 
 2. [De verjaardagen-plugin maken](2-shortcodes.md)
 3. [Een database-tabel maken](3-datamodel.md)
 4. [Een plugin-menupagina maken](4-menupage.md)
+5. [Vervolgwerkzaamheden](5-appendix.md)
